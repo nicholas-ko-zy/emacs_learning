@@ -1,0 +1,46 @@
+(setq inhibit-startup-message t)  ; dont show the GNU splash screen
+(require 'package)
+;; Add MELPA to the list of package archives
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")))
+
+;; Don't activate packages at startup, we'll do it manually
+(setq package-enable-at-startup nil)
+
+;; Initialize the package system
+(package-initialize)
+
+;; Fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+
+
+(transient-mark-mode t)           ; show selection from mark
+(setq visible-bell 1)             ; turn off bip warnings
+(show-paren-mode t)               ; turn on highlight paren mode
+(fset 'yes-or-no-p 'y-or-n-p)     ; use y and n for questions
+(global-font-lock-mode t)         ; enable syntax highlighting
+(icomplete-mode 99)               ; better buffer switching
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+
+;; -*- mode: elisp -*-
+
+;; Disable the splash screen (to enable it agin, replace the t with 0)
+(setq inhibit-splash-screen t)
+
+;; Enable transient mark mode
+(transient-mark-mode 1)
+
+;;;;Org mode configuration
+;; Enable Org mode
+(require 'org)
+;; Make Org mode work with files ending in .org
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; The above is the default in recent emacsen
+
+(setq org-startup-numerated t) ;; Enable numbered headings for all Org files globally
+
