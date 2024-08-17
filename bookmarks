@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-refile-last-stored"
+(("org-capture-last-stored"
+ (filename . "~/RoamNotes/20240801101839-straight_el.org")
+ (front-context-string . "\nNotes on straig")
+ (rear-context-string . "le: straight.el\n")
+ (position . 89))
+("org-refile-last-stored"
  (filename . "~/Documents/personal_life/learning/org-mode/org_mode_trial.org")
  (front-context-string . "** something som")
  (rear-context-string . "s into numbers\n\n")

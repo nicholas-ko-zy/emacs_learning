@@ -1,28 +1,41 @@
+; Danvy
 (setq inhibit-startup-message t)  ; dont show the GNU splash screen
-(require 'package)
-;; Add MELPA to the list of package archives
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")))
-
-;; Don't activate packages at startup, we'll do it manually
-(setq package-enable-at-startup nil)
-
-;; Initialize the package system
-(package-initialize)
-
-;; Fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
-
-
-
 (transient-mark-mode t)           ; show selection from mark
 (setq visible-bell 1)             ; turn off bip warnings
 (show-paren-mode t)               ; turn on highlight paren mode
 (fset 'yes-or-no-p 'y-or-n-p)     ; use y and n for questions
 (global-font-lock-mode t)         ; enable syntax highlighting
 (icomplete-mode 99)               ; better buffer switching
+; Danvy
+
+;; Zamansky start
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+'("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(use-package try
+  :ensure t)
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+
+;; Zamansky end
+(setq browse-url-browser-function #'browse-url-firefox)
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
@@ -44,3 +57,16 @@
 
 (setq org-startup-numerated t) ;; Enable numbered headings for all Org files globally
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ispell-dictionary nil)
+ '(package-selected-packages '(org-bullets which-key try use-package)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
